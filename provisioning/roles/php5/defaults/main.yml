@@ -1,0 +1,73 @@
+# Defaults are based on the Open Web Application Security Project
+# for more information, see
+# https://www.owasp.org/index.php/PHP_Configuration_Cheat_Sheet
+
+#[PHP error handling]
+expose_php                : "false"
+error_reporting           : E_ALL & ~E_DEPRECATED & ~E_STRICT
+display_errors            : "false"
+display_startup_errors    : "false"
+log_errors                : "true"
+error_log                 : /var/log/apache2/php_error.log
+ignore_repeated_errors    : "false"
+
+#[PHP general settings]
+date_timezone             : '{{ timezone }}'
+# Composer requires that allow_url_fopen be turned on.
+# https://github.com/composer/composer/blob/d5feea83b6b454a30e41d9b3963620bce03bad4b/src/Composer/Command/DiagnoseCommand.php#L366
+allow_url_fopen           : "true"
+allow_url_include         : "false"
+allow_webdav_methods      : "false"
+
+#[PHP file upload handling]
+file_uploads              : "true"
+upload_tmp_dir            :
+upload_max_filesize       : 2M
+max_file_uploads          : 20
+upload_max_filesize       : 25M
+
+#[PHP executable handling]
+enable_dl                 : "true"
+disable_functions         : system, exec, shell_exec, passthru, phpinfo, show_source, popen, proc_open,
+                            fopen_with_path, dbmopen, dbase_open, putenv, move_uploaded_file,
+                            chdir, mkdir, rmdir, chmod
+                            filepro, filepro_rowcount, filepro_retrieve, posix_mkfifo
+disable_classes           :
+
+#[PHP session handling]
+session_auto_start        : "false"
+session_save_path         : /tmp
+session_name              : myPHPSESSID
+session_hash_function     : 1
+session_hash_bits_per_character : 6
+session_use_trans_sid     : 0
+#session_cookie_domain    : full.qualified.domain.name
+session_cookie_domain     :
+session_cookie_path       : /
+session_cookie_lifetime   : 0
+session_cookie_secure     : "false"
+session_cookie_httponly   : "true"
+session_use_only_cookies  : "true"
+session_cache_expire      : 30
+default_socket_timeout    : 60
+
+#[PHP misc]
+mysqlnd_collect_memory_statistics: "false"
+sendmail_path             : /usr/sbin/sendmail -t
+session_save_path         : /tmp
+
+#[PHP performance]
+max_execution_time        : 60
+memory_limit              : 32M
+max_input_time            : 300
+max_input_vars            : 1000
+post_max_size             : 32M
+track_errors              : "false"
+realpath_cache_size       : 16K
+realpath_cache_ttl        : 120
+
+#[Opcache settings]
+opcache_enable                : "true"
+opcache_memory_consumption    : 128
+opcache_max_accelerated_files : 8000
+

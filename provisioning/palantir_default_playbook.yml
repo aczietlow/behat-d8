@@ -1,0 +1,35 @@
+---
+- hosts: all
+  sudo: true
+  vars:
+    phantomjs: phantomjs-1.9.7-linux-x86_64
+    web_server: apachephp
+    servername: localhost
+    timezone: America/Chicago
+    rvm1_install_flags: '--auto-dotfiles --user-install'
+    rvm1_user: '{{ ansible_ssh_user }}'
+    rvm1_symlink_user: '{{ ansible_ssh_user }}'
+    rvm1_symlink_group: '{{ ansible_ssh_user }}'
+    # These are the recommended Drupal php tunings.
+    # See https://www.drupal.org/node/2602.
+    upload_max_filesize: 10M
+    post_max_size: 10M
+    realpath_cache_size: 64K
+    realpath_cache_ttl: 3600
+    # Palantir's default.
+    memory_limit: 192M
+  vars_files:
+    - vars/mysql.yml
+    - vars/nodejs.yml
+    - vars/common.yml
+    - [ "vars/apachephp.yml", "vars/ws_defaults.yml" ]
+  roles:
+    - init
+    - apache
+    - php5
+    - mysql
+    - composer
+    - phpcommon
+    - phantomjs
+    - nodejs
+    - { role: rvm_io.rvm1-ruby, tags: ruby, sudo: True }
