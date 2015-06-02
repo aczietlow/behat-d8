@@ -15,6 +15,6 @@ done
 drush="$base/bin/drush.php $drush_flags"
 
 pushd $base/www
-$drush si standard --site-name="Scylla" --account-pass=admin -y
-$drush dis -y overlay shortcuts comments toolbar
-$drush en -y admin_menu module_filter features strongarm
+#$drush si standard --site-name="Scylla" --account-pass=admin -y
+#$drush dis -y overlay shortcuts comments toolbar
+#$drush en -y admin_menu module_filter features strongarm

@@ -2,3 +2,26 @@
 build/*.box
 
 .idea/
+
+# Ignore composer downloads
+vendor
+bin/*
+
+
+!bin/drupal_init
+!bin/cnf
+
+# Ignore Vagrant box
+.vagrant/
+
+# Exclude IDE management files.
+# PHP Storm
+.idea
+
+# Netbeans
+netbeans
+
+# Exclude hidden OSX files.
+.DS_Store
+._*
+Thumbs.db
